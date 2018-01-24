@@ -3,7 +3,7 @@
 - name: "Installing lynx"
   yum:
     name: lynx
-    state: present
+    state: absent
 
 - name: Schedule ansible-pull
   cron:
@@ -12,5 +12,5 @@
     user: "centos"
     minute: "*"
     hour: "*"
-    job: "/usr/bin/ansible-pull -U {{ DEPLOYMENT_REPO }} -o -e target=localhost {{ DEPLOYMENT_PLAY }}"
+    job: "/usr/bin/ansible-pull -U {{ DEPLOYMENT_REPO }} --full -o -e target=localhost {{ DEPLOYMENT_PLAY }}"
 
