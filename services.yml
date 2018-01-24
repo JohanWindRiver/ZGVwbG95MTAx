@@ -3,7 +3,7 @@
 # Playbook to setup service instances
 
 - name: Setup service nodes
-  hosts: services
+  hosts: '{{ service_hosts | default("services") }}'
   gather_facts: yes
   become: true
   roles:
