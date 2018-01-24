@@ -15,4 +15,5 @@ hdc-vm-2
 [workers]
 hdc-vm-3
 
-
+[self]
+localhost
