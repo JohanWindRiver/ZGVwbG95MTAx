@@ -4,7 +4,7 @@
 # We want to run a private docker registry among other things.
 
 - name: Setup Bastion nodes
-  hosts: bastions
+  hosts: '{{ bastion_hosts | default("bastions") }}'
   gather_facts: yes
   become: true
   roles:
@@ -12,8 +12,3 @@
     - base_config
     - docker_ce
 
-
-# TODO: To inssall wangsha's version of docker registry
-#   ansible-galaxy install wangsha.docker-registry -p ./roles
-# Then use role - however, may implement own
-#    - wangsha.docker-registry

@@ -1,7 +1,0 @@
----
-- hosts: 'localhost'
-  vars:
-    docker_api_version: "1.20"
-  roles:
-    - role: 'docker-registry'
-      become: true
