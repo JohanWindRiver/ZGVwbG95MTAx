@@ -4,7 +4,7 @@
 # We want to run a private docker registry among other things.
 
 - name: Setup Bastion nodes
-  hosts: '{{ bastions | default("bastions") }}'
+  hosts: '{{ target | default("bastions") }}'
   gather_facts: yes
   become: true
   roles:

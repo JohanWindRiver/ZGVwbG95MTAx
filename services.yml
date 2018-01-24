@@ -3,7 +3,7 @@
 # Playbook to setup service instances
 
 - name: Setup service nodes
-  hosts: '{{ services | default("services") }}'
+  hosts: '{{ target | default("services") }}'
   gather_facts: yes
   become: true
   roles:
@@ -12,6 +12,7 @@
     - docker_ce
     #- etcd_cluster
     - { role: etcd_cluster, etcd_peers: ["10.10.20.3"] }
+    - { role: schedule_pull, DEPLOYMENT_PLAY: "services.yml" }
 
 
 # NOTE
