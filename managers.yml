@@ -3,7 +3,7 @@
 # Playbook to setup manager instances
 
 - name: Setup manager nodes
-  hosts: '{{ manager_hosts | default("managers") }}'
+  hosts: '{{ managers | default("managers") }}'
   #gather_facts: no
   become: true
   roles:

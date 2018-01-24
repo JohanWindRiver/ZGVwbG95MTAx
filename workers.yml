@@ -3,7 +3,7 @@
 # Playbook to setup worker instances
 
 - name: Setup worker nodes
-  hosts: '{{ worker_hosts | default("workers") }}'
+  hosts: '{{ workers | default("workers") }}'
   #gather_facts: no
   become: true
   roles:

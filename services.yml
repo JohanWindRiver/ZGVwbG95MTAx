@@ -4,7 +4,6 @@
 
 - name: Setup service nodes
   hosts: '{{ services | default("services") }}'
-  #hosts: '{{ service_hosts | default("services") }}'
   gather_facts: yes
   become: true
   roles:
