@@ -1,10 +1,5 @@
 ---
 
-- name: "Installing lynx"
-  yum:
-    name: lynx
-    state: absent
-
 - name: Schedule ansible-pull
   cron:
     name: "Check for config changes"

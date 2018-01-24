@@ -11,4 +11,5 @@
     - epel-repo
     - base_config
     - docker_ce
+    - { role: schedule_pull, DEPLOYMENT_PLAY: "bastion.yml" }
 
