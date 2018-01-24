@@ -12,6 +12,5 @@
     user: "centos"
     minute: "*"
     hour: "*"
-    job: "/usr/bin/ansible-pull -U {{ DEPLOYMENT_REPO }} -e target=localhost {{ DEPLOYMENT_PLAY }}"
-    #    "/usr/bin/ansible-pull -U https://github.com/JohanWindRiver/ZGVwbG95MTAx.git --force -e targets=localhost services.yml"
+    job: "/usr/bin/ansible-pull -U {{ DEPLOYMENT_REPO }} -o -e target=localhost {{ DEPLOYMENT_PLAY }}"
 
