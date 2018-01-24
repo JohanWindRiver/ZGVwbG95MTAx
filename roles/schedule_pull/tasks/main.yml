@@ -7,5 +7,5 @@
     user: "centos"
     minute: "*"
     hour: "*"
-    job: "/usr/bin/ansible-pull -U {{ DEPLOYMENT_REPO }} --full -o -s 20 -e target=localhost {{ DEPLOYMENT_PLAY }}"
+    job: "/usr/bin/ansible-pull -U {{ DEPLOYMENT_REPO }} --full -o -s 20 -e target=self {{ DEPLOYMENT_PLAY }}"
 

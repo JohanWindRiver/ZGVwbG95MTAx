@@ -10,7 +10,6 @@
     - epel-repo
     - base_config
     - docker_ce
-    #- etcd_cluster
     - { role: etcd_cluster, etcd_peers: ["10.10.20.3"] }
     - { role: schedule_pull, DEPLOYMENT_PLAY: "services.yml" }
 

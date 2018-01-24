@@ -10,6 +10,7 @@ TOKEN_COUNT: "1"
 etcd_version: 'latest'
 etcd_image: "quay.io/coreos/etcd:{{etcd_version}}"
 etcd_peers_group: etcd_servers
+etcd_data_dir: "/var/lib/etcd/"
 
 etcd_client_port: 2379
 etcd_url_scheme: http

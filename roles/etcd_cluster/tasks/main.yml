@@ -1,11 +1,15 @@
 ---
+# Start etcd docker container and set the data dir to be external to the
+# running container. This way containers can be upgraded without data loss
 
 - name: run etcd container
   docker_container:
     name: etcd
     image: "{{ etcd_image }}"
-    state: started #jjk reloaded
+    state: started
     detach: true
+    volumes:
+      - "{{ etcd_data_dir }}:{{ etcd_data_dir }}:rw"
     ports:
     - "2380:2380"
     - "2379:2379"
@@ -18,6 +22,7 @@
       ETCD_INITIAL_CLUSTER: "{{ etcd_initial_cluster }}"
       ETCD_INITIAL_CLUSTER_TOKEN: "{{ etcd_initial_cluster_token }}"
       ETCD_INITIAL_CLUSTER_STATE: "{{ etcd_initial_cluster_state }}"
+      ETCD_DATA_DIR: "{{ etcd_data_dir }}"
     restart_policy: always
   tags:
     - etcd
