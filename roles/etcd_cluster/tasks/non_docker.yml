@@ -1,0 +1,48 @@
+---
+
+- name: Installing packages required to setup an etcd cluster
+  yum: name={{ item }} state=present
+  with_items:
+    - etcd.x86_64
+
+- name: Check if /etc/systemd/system/etcd.service has been created
+  stat: path=/etc/systemd/system/etcd.service
+  register: etcd_config_file
+
+- name: Get random UUID
+  shell: cat /proc/sys/kernel/random/uuid > /tmp/uuid.created
+  args:
+    creates: /tmp/uuid.created
+  when: not etcd_config_file.stat.exists
+
+- name: Read random uuid
+  command: cat /tmp/uuid.created
+  register: ETCD_UNIQUE_NUMBER
+  when: not etcd_config_file.stat.exists
+
+- name: Set permissions on /var/lib/etcd/
+  file:
+    path: /var/lib/etcd
+    state: directory
+    owner: centos
+    group: centos
+    mode: 0775
+    recurse: no
+
+- name: Generate etcd.service from template
+  template:
+    src: etcd.service.j2
+    dest: /etc/systemd/system/etcd.service
+    owner: root
+    group: root
+    mode: 0664
+  when: not etcd_config_file.stat.exists
+
+# TODO: Add a restart handler
+#
+- name: Ensure etcd daemon is running
+  service:
+    name: etcd
+    enabled: yes
+    state: started
+

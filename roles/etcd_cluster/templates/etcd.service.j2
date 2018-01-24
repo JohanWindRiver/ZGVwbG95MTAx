@@ -1,0 +1,26 @@
+# The template is constructed to be parsed in this form by the enumerator and
+# proxy2member applications. Test both applications when modifications are made.
+#
+[Unit]
+Description=etcd
+Documentation=https://github.com/coreos/etcd
+Conflicts=etcd.service
+Conflicts=etcd2.service
+
+[Service]
+User=centos
+Restart=always
+RestartSec=5s
+LimitNOFILE=40000
+TimeoutStartSec=0
+ExecStart=/usr/bin/etcd --name etcd-{{ ETCD_UNIQUE_NUMBER.stdout }} \
+    --data-dir /var/lib/etcd \
+    --discovery {{ DISCOVERY_TOKEN }} \
+    --listen-client-urls http://{{ ansible_default_ipv4.address }}:2379,http://127.0.0.1:2379 \
+    --advertise-client-urls http://{{ ansible_default_ipv4.address }}:2379 \
+    --initial-advertise-peer-urls http://{{ ansible_default_ipv4.address }}:2380 \
+    --listen-peer-urls http://{{ ansible_default_ipv4.address }}:2380
+ExecStop=/usr/bin/kill -9 etcd
+
+[Install]
+WantedBy=multi-user.target

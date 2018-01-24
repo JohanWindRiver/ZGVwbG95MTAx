@@ -1,0 +1,11 @@
+---
+
+- name: Installing a list of base packages that are common
+  yum: name={{ item }} state=present
+  with_items:
+    - yum-utils
+    - epel-release
+    - jq
+    - unzip
+    - wget
+    - bind-utils

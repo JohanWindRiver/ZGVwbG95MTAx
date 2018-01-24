@@ -1,0 +1,12 @@
+---
+
+# Playbook to setup worker instances
+
+- name: Setup worker nodes
+  hosts: workers
+  #gather_facts: no
+  become: true
+  roles:
+    - epel-repo
+    - base_config
+    - docker_ce

@@ -1,0 +1,12 @@
+---
+
+# Playbook to setup manager instances
+
+- name: Setup manager nodes
+  hosts: managers
+  #gather_facts: no
+  become: true
+  roles:
+    - epel-repo
+    - base_config
+    - docker_ce

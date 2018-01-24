@@ -1,0 +1,25 @@
+---
+
+# Playbook to setup service instances
+
+- name: Setup service nodes
+  hosts: services
+  gather_facts: yes
+  become: true
+  roles:
+    - epel-repo
+    - base_config
+    - docker_ce
+    #- etcd_cluster
+    - { role: etcd_cluster, etcd_peers: ["10.10.20.3"] }
+
+
+# NOTE
+# Specify the nodes in the etcd cluster as below, or add the hosts
+#   in question to the group [etcd_servers]
+# Examples
+#    - { role: indigo-dc.etcd, etcd_peers: ["10.10.10.1", "10.10.10.2", "10.10.10.3"] }
+#          or
+#    - { role: etcd_cluster, etcd_peers: ["10.10.20.3"] }
+#          or when specified in [etcd_servers] just
+#    - etcd_cluster

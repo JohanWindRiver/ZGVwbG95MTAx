@@ -1,0 +1,9 @@
+---
+
+# Instead of just using a global package, install a specific version from
+# the source repo
+
+DOCKER_REPO: "https://download.docker.com/linux/centos/7/x86_64/stable"
+DOCKER_KEYS: "https://yum.dockerproject.org/gpg"
+DOCKER_VERS: "17.12.0.ce-1.el7.centos.x86_64"
+docker_repofile_path: "/etc/yum.repos.d/docker-ce.repo"

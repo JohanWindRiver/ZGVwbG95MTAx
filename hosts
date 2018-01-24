@@ -1,0 +1,18 @@
+localhost ansible_connection=local
+
+[boot]
+bootstrap
+
+[bastions]
+hdc-bastion
+
+[services]
+hdc-vm-1
+
+[managers]
+hdc-vm-2
+
+[workers]
+hdc-vm-3
+
+

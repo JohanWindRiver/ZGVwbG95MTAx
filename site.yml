@@ -1,0 +1,8 @@
+---
+
+# Configuring a complete site by setting up the service, manager and worker nodes
+
+- import_playbook: bastion.yml
+- import_playbook: services.yml
+- import_playbook: managers.yml
+- import_playbook: workers.yml

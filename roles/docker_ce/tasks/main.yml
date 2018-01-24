@@ -1,0 +1,44 @@
+---
+
+# Add docker-ce repo to yum configuration and install a specific version
+# specified in ../vars/main.yml
+
+- name: Check if docker-ce repo is already configured.
+  stat: path={{ docker_repofile_path }}
+  register: docker_repofile_result
+
+- name: Add repository for docker-ce distributions
+  yum_repository:
+    name: docker-ce
+    description: docker-ce repo
+    baseurl: "{{ DOCKER_REPO }}"
+    state: present
+    enabled: yes
+    gpgcheck: no
+    gpgkey: "{{ DOCKER_KEYS }}"
+  when: not docker_repofile_result.stat.exists
+
+
+- name: Installing a list of base packages that are common
+  yum: name={{ item }} state=present
+  with_items:
+    - docker-ce-{{ DOCKER_VERS }}
+
+- debug:
+    msg: "Docker version is docker-ce-{{ DOCKER_VERS }}.el7.centos"
+
+- name: Ensure docker service is started
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+- easy_install:
+    name: pip
+    state: latest
+
+- name: Install docker python module
+  pip:
+    name: "docker-compose==1.12.0"
+
+
